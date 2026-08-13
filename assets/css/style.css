@@ -53,7 +53,9 @@ body{
   text-rendering:optimizeLegibility;
 }
 
-img{ max-width:100%; display:block; }
+/* height:auto คู่กับ width/height ที่ระบุใน <img> — เบราว์เซอร์จะจองพื้นที่ตามสัดส่วนจริง
+   ตั้งแต่ก่อนรูปโหลดเสร็จ หน้าจึงไม่กระตุกยุบ-ขยายระหว่างโหลด */
+img{ max-width:100%; height:auto; display:block; }
 
 /* ── ม่านเปิดการ์ด ─────────────────────────────────────── */
 .curtain{
@@ -278,17 +280,20 @@ img{ max-width:100%; display:block; }
   box-shadow:0 22px 60px -34px rgba(0,0,0,.75);
 }
 
+/* กรอบการ์ดเชิญ — เลิกใช้ทรงซุ้มโค้ง + กรอบซ้อนสองชั้น ซึ่งอ่านเป็นงานคลาสสิก
+   เปลี่ยนเป็นแผ่นมุมมนสม่ำเสมอ เส้นขอบชั้นเดียวบาง ๆ และมีขีดสั้นไล่แดง→เขียวคาดด้านบน */
 .invite{
   position:relative; margin-inline:auto; max-width:640px;
   background:var(--cream-2); color:var(--ink); text-align:center;
-  padding:clamp(52px,8vw,86px) clamp(26px,6vw,60px) clamp(42px,6vw,68px);
-  /* ทรงโค้งด้านบนแบบซุ้มการ์ดเชิญ */
-  border-radius:50% 50% 4px 4px / 24% 24% 1% 1%;
-  box-shadow:0 40px 90px -55px #000;
+  padding:clamp(48px,7vw,76px) clamp(26px,6vw,60px) clamp(44px,6vw,66px);
+  border:1px solid var(--gold-line);
+  border-radius:clamp(14px,2.4vw,24px);
+  box-shadow:0 34px 80px -50px rgba(0,0,0,.85);
 }
 .invite::before{
-  content:""; position:absolute; inset:13px;
-  border:1px solid var(--gold); border-radius:inherit; pointer-events:none;
+  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%);
+  width:clamp(56px,18%,96px); height:3px; border-radius:0 0 3px 3px;
+  background:linear-gradient(90deg,var(--red),var(--green));
 }
 .invite__parents{ margin:0; font-size:clamp(1rem,2.5vw,1.1rem); line-height:2.1; }
 .invite__and{
@@ -509,7 +514,47 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
   .agenda li{ flex-direction:column; gap:.15rem; align-items:flex-start; }
   .agenda span{ text-align:left; }
   .photo::before{ inset:10px -10px -10px 10px; }
-  .invite{ border-radius:50% 50% 4px 4px / 14% 14% 1% 1%; }
+}
+
+/* แท็บเล็ตแนวตั้ง (600-820px) — กฎมือถือด้านบนยุบทุกอย่างเหลือคอลัมน์เดียว
+   ซึ่งกว้างเกินไปสำหรับจอขนาดนี้ ดึงกลับมาเป็นหลายคอลัมน์ */
+@media (min-width:600px) and (max-width:820px){
+  .gal{ grid-template-columns:repeat(2,1fr); max-width:none; }
+  .count{ grid-template-columns:repeat(4,1fr); }
+  .times{ grid-template-columns:repeat(4,1fr); row-gap:0; }
+  .times li + li::before{ display:block; }
+  .form{ grid-template-columns:1fr 1fr; }
+  .agenda li{ flex-direction:row; align-items:baseline; }
+  .agenda span{ text-align:right; }
+}
+
+/* จอเล็กมาก (iPhone SE / เครื่องเก่า ~320-380px) — บีบระยะและตัวอักษรที่ยังอึดอัด */
+@media (max-width:380px){
+  .wrap{ width:92vw; }
+  .invite{ padding:40px 20px 38px; }
+  .dateblock__side{ min-width:66px; letter-spacing:.1em; }
+  .times{ column-gap:8px; }
+  .times li{ padding:0 2px; }
+  .btn{ padding:.8rem 1.4rem; letter-spacing:.12em; font-size:.8rem; }
+  .music{ left:12px; bottom:12px; width:42px; height:42px; }
+}
+
+/* มือถือแนวนอน / จอเตี้ย — hero สูง 100svh จะทำให้ข้อความล้นออกนอกจอ
+   ปล่อยให้สูงตามเนื้อหาแทน แล้วลดความสูงขั้นต่ำของแถบภาพลง */
+@media (max-height:520px) and (orientation:landscape){
+  .hero{ min-height:auto; }
+  .hero__content{ padding-top:38px; padding-bottom:10px; }
+  .hero__art{ min-height:180px; }
+  .scrolldown{ display:none; }
+  .section{ padding:44px 0; }
+}
+
+/* จอใหญ่มาก (≥1600px) — ขยายคอลัมน์เนื้อหาไม่ให้ดูลอยกลางจอเกินไป
+   แต่ไม่ขยายรูป เพราะรูปมีขนาดจริงจำกัด ขยายแล้วจะแตก */
+@media (min-width:1600px){
+  .wrap{ width:min(1240px,80vw); }
+  .wrap.narrow{ width:min(820px,60vw); }
+  .section{ padding:clamp(120px,10vh,180px) 0; }
 }
 
 @media (prefers-reduced-motion:reduce){
