@@ -283,17 +283,31 @@ img{ max-width:100%; height:auto; display:block; }
 /* กรอบการ์ดเชิญ — เลิกใช้ทรงซุ้มโค้ง + กรอบซ้อนสองชั้น ซึ่งอ่านเป็นงานคลาสสิก
    เปลี่ยนเป็นแผ่นมุมมนสม่ำเสมอ เส้นขอบชั้นเดียวบาง ๆ และมีขีดสั้นไล่แดง→เขียวคาดด้านบน */
 .invite{
+  --invite-r:clamp(14px,2.4vw,24px);
+  --invite-inset:10px;
   position:relative; margin-inline:auto; max-width:640px;
   background:var(--cream-2); color:var(--ink); text-align:center;
   padding:clamp(48px,7vw,76px) clamp(26px,6vw,60px) clamp(44px,6vw,66px);
-  border:1px solid var(--gold-line);
-  border-radius:clamp(14px,2.4vw,24px);
-  box-shadow:0 34px 80px -50px rgba(0,0,0,.85);
+  /* เส้นทอง 3 ชั้นซ้อนกัน = มิติ แต่ยังไม่กลับไปเป็นกรอบลายคลาสสิก
+     ① ขอบนอกทองเต็ม ② วงทองจาง ๆ นอกสุดจาก box-shadow ③ เส้นในจาก ::after */
+  border:1px solid var(--gold);
+  border-radius:var(--invite-r);
+  box-shadow:
+    0 0 0 5px rgba(216,176,99,.13),
+    0 34px 80px -50px rgba(0,0,0,.85);
 }
+/* ขีดสั้นไล่แดง→เขียวคาดกลางขอบบน */
 .invite::before{
   content:""; position:absolute; left:50%; top:0; transform:translateX(-50%);
   width:clamp(56px,18%,96px); height:3px; border-radius:0 0 3px 3px;
   background:linear-gradient(90deg,var(--red),var(--green));
+  z-index:1;
+}
+/* เส้นทองด้านในเยื้องเข้ามา — ตัวที่ทำให้เกิดความลึก */
+.invite::after{
+  content:""; position:absolute; inset:var(--invite-inset); pointer-events:none;
+  border:1px solid rgba(216,176,99,.5);
+  border-radius:calc(var(--invite-r) - 5px);
 }
 .invite__parents{ margin:0; font-size:clamp(1rem,2.5vw,1.1rem); line-height:2.1; }
 .invite__and{
@@ -531,7 +545,7 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
 /* จอเล็กมาก (iPhone SE / เครื่องเก่า ~320-380px) — บีบระยะและตัวอักษรที่ยังอึดอัด */
 @media (max-width:380px){
   .wrap{ width:92vw; }
-  .invite{ padding:40px 20px 38px; }
+  .invite{ padding:40px 20px 38px; --invite-inset:7px; }
   .dateblock__side{ min-width:66px; letter-spacing:.1em; }
   .times{ column-gap:8px; }
   .times li{ padding:0 2px; }
