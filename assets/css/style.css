@@ -5,13 +5,18 @@
    ============================================================ */
 
 :root{
-  /* ── โทนหลัก ── */
-  --brown:#463A2C;          /* พื้นแถบมืด = สีพื้นการ์ดเชิญ */
-  --brown-deep:#3A3025;     /* ม่านเปิดการ์ด · ท้ายหน้า */
-  --red:#8E2531;            /* แดงเข้ม — ตัวเลข ปุ่ม หัวข้อเล็ก */
+  /* ── สองสีหลักตามบรีฟ: แดง + เขียว ────────────────────
+     แถบมืดสลับ "เขียวมอสเข้ม ↔ แดงเบอร์กันดี" ให้ทั้งสองสีเป็นพระเอกเท่ากัน
+     ทองกับครีมเป็นตัวประกอบ (เส้นขอบ · ตัวอักษรบนพื้นเข้ม) */
+  --green-deep:#3D4A2B;     /* พื้นแถบเขียว */
+  --green-darkest:#333D24;  /* ม่านเปิดการ์ด · ท้ายหน้า */
+  --green:#5C662F;          /* เขียวสำหรับตัวหนังสือบนครีม (เฉด #6E7A3A ได้แค่ 4.35 ต่ำกว่าเกณฑ์ 4.5) */
+  --moss:#A7B15C;           /* เขียวมอสสว่าง — ลายประดับ */
+
+  --red-deep:#7A1F2B;       /* พื้นแถบแดง */
+  --red:#8E2531;            /* แดงสำหรับตัวหนังสือ/ปุ่ม บนครีม */
   --red-hi:#A32F3C;
-  --olive:#A7B15C;          /* เขียวมอส — ลายเส้นประดับ */
-  --olive-deep:#5C662F;     /* เขียวเข้มพอสำหรับตัวหนังสือบนครีม (เฉด #6E7A3A ได้แค่ 4.35 ต่ำกว่าเกณฑ์) */
+
   --gold:#D8B063;           /* ทอง — ใช้กับ "เส้นขอบ" */
   --gold-text:#EBCB86;      /* ทองสว่าง — ใช้กับ "ตัวหนังสือ" บนพื้นเข้ม */
   --gold-line:rgba(216,176,99,.40);
@@ -57,7 +62,7 @@ img{ max-width:100%; display:block; }
 /* ── ม่านเปิดการ์ด ─────────────────────────────────────── */
 .curtain{
   position:fixed; inset:0; z-index:70;
-  background:var(--brown-deep);
+  background:var(--green-darkest);
   display:grid; place-items:center; text-align:center;
   padding:6vw;
   transition:opacity .9s ease, visibility .9s;
@@ -84,7 +89,7 @@ img{ max-width:100%; display:block; }
   border:1px solid var(--gold); border-radius:999px;
   cursor:pointer; transition:.35s;
 }
-.curtain__btn:hover{ background:var(--gold); color:var(--brown-deep); letter-spacing:.36em; }
+.curtain__btn:hover{ background:var(--gold); color:var(--green-darkest); letter-spacing:.36em; }
 
 /* ── จุดนำทางด้านข้าง ──────────────────────────────────── */
 .dots{
@@ -103,7 +108,7 @@ img{ max-width:100%; display:block; }
   content:attr(data-label);
   position:absolute; right:22px; top:50%; transform:translateY(-50%);
   font-size:.62rem; letter-spacing:.12em; white-space:nowrap;
-  background:var(--brown-deep); color:var(--cream-2); padding:3px 9px; border-radius:3px;
+  background:var(--green-darkest); color:var(--cream-2); padding:3px 9px; border-radius:3px;
   opacity:0; pointer-events:none; transition:.25s;
 }
 .dots a:hover::after{ opacity:1; }
@@ -116,17 +121,20 @@ img{ max-width:100%; display:block; }
 /* --section-bg ใช้ต่อในไล่เฉดของแถบภาพ จะได้กลืนกับพื้นของส่วนนั้น ๆ เสมอ */
 .section{ padding:clamp(80px,12vh,150px) 0; position:relative; }
 .section--light{ --section-bg:var(--cream-2); background:var(--section-bg); color:var(--ink); }
+/* แถบมืดมี 2 เฉด สลับกันไปตลอดหน้า — เขียวมอสเข้ม ↔ แดงเบอร์กันดี */
 .section--dark{
-  --section-bg:var(--brown); background:var(--section-bg); color:var(--cream-2);
+  background:var(--section-bg); color:var(--cream-2);
   border-block:1px solid var(--gold-line);
 }
+.section--green{ --section-bg:var(--green-deep); }
+.section--red{ --section-bg:var(--red-deep); }
 
 .eyebrow{
   font-family:var(--serif); text-transform:uppercase;
   letter-spacing:.42em; font-size:.72rem; color:var(--red);
   margin:0 0 .5rem;
 }
-.eyebrow--sub{ letter-spacing:.3em; font-size:.68rem; }
+.eyebrow--sub{ letter-spacing:.3em; font-size:.68rem; color:var(--green); }
 .section--dark .eyebrow{ color:var(--gold-text); }
 
 .script{ font-family:var(--script); font-weight:400; margin:.1em 0; line-height:1.2; }
@@ -151,7 +159,7 @@ img{ max-width:100%; display:block; }
 .rule::after{
   content:""; position:absolute; left:50%; top:50%;
   width:6px; height:6px; transform:translate(-50%,-50%) rotate(45deg);
-  background:var(--olive-deep);
+  background:var(--green);
 }
 
 .btn{
@@ -164,7 +172,7 @@ img{ max-width:100%; display:block; }
 }
 .btn:hover{ background:var(--red-hi); border-color:var(--red-hi); }
 .section--dark .btn{ background:transparent; color:var(--gold-text); border-color:var(--gold); }
-.section--dark .btn:hover{ background:var(--gold); color:var(--brown-deep); }
+.section--dark .btn:hover{ background:var(--gold); color:var(--green-darkest); }
 .btnrow{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:2rem; }
 
 /* ── HERO ─────────────────────────────────────────────── */
@@ -262,7 +270,7 @@ img{ max-width:100%; display:block; }
 }
 .invite__parents{ margin:0; font-size:clamp(.95rem,2.4vw,1.05rem); line-height:2.1; }
 .invite__and{
-  margin:1.1rem 0; font-size:.92rem; letter-spacing:.14em; color:var(--olive-deep);
+  margin:1.1rem 0; font-size:.92rem; letter-spacing:.14em; color:var(--green);
 }
 .invite__lead{
   margin:1.5rem 0 0; font-size:clamp(.98rem,2.5vw,1.08rem); line-height:2;
@@ -330,9 +338,10 @@ img{ max-width:100%; display:block; }
   display:block; font-family:var(--serif); font-weight:400;
   font-size:clamp(1.25rem,3.6vw,1.9rem); letter-spacing:.04em; color:var(--red);
 }
+/* เวลา = แดง · ชื่อพิธี = เขียว ให้สองสีหลักอยู่คู่กันในบล็อกเดียว */
 .times span{
   display:block; margin-top:.35rem;
-  font-size:clamp(.76rem,1.9vw,.88rem); line-height:1.7; color:var(--ink-soft);
+  font-size:clamp(.76rem,1.9vw,.88rem); line-height:1.7; color:var(--green);
 }
 .section--dark .times b{ color:var(--gold-text); }
 .section--dark .times span{ color:var(--cream-soft); }
@@ -392,7 +401,7 @@ img{ max-width:100%; display:block; }
 .thanks .script{ display:block; margin-top:.2rem; color:var(--red); }
 .section--dark .thanks .script{ color:var(--gold-text); }
 .toast{
-  min-height:1.4em; margin-top:1rem; font-size:.88rem; color:var(--olive-deep);
+  min-height:1.4em; margin-top:1rem; font-size:.88rem; color:var(--green);
   opacity:0; transition:opacity .3s;
 }
 .section--dark .toast{ color:var(--gold-text); }
@@ -401,7 +410,7 @@ img{ max-width:100%; display:block; }
 /* ── FOOTER ───────────────────────────────────────────── */
 .foot{
   text-align:center; padding:70px 6vw;
-  background:var(--brown-deep); color:var(--cream-2);
+  background:var(--green-darkest); color:var(--cream-2);
   border-top:1px solid var(--gold-line);
 }
 .foot .script{ color:var(--cream-2); }
