@@ -17,13 +17,14 @@
   --red-hi:#A32F3C;
 
   /* ── น้ำตาล: ตัวเสริมความอุ่น ไม่ใช่สีหลัก ──────────────
-     ใช้แค่ 3 ที่ — ม่านเปิดการ์ด/ท้ายหน้า · สีตัวอักษร · ครีมเฉดอุ่นของแถบสลับ */
+     ใช้ 3 ที่เท่านั้น — ม่านเปิดการ์ด/ท้ายหน้า · สีตัวอักษร · เฉดครีมของพื้นหน้า */
   --brown-deep:#3B2F25;
+
   --gold:#D8B063;           /* ทอง — ใช้กับ "เส้นขอบ" */
   --gold-text:#EBCB86;      /* ทองสว่าง — ใช้กับ "ตัวหนังสือ" บนพื้นเข้ม */
   --gold-line:rgba(216,176,99,.40);
 
-  --cream:#F0E8DA;          /* ครีมเฉดอุ่น (อมน้ำตาล) — แถบสลับ */
+  --cream:#F0E8DA;          /* ครีมอมน้ำตาลอ่อน ๆ */
   --cream-2:#FBF7EC;
   --cream-soft:rgba(251,247,236,.76);   /* ตัวอักษรรองบนพื้นเข้ม */
 
@@ -123,8 +124,6 @@ img{ max-width:100%; display:block; }
 /* --section-bg ใช้ต่อในไล่เฉดของแถบภาพ จะได้กลืนกับพื้นของส่วนนั้น ๆ เสมอ */
 .section{ padding:clamp(80px,12vh,150px) 0; position:relative; }
 .section--light{ --section-bg:var(--cream-2); background:var(--section-bg); color:var(--ink); }
-/* ครีมเฉดอุ่นกว่า ใช้สลับกับ --light เพื่อให้แถบสว่างที่อยู่ติดกันยังแยกออกจากกัน */
-.section--cream{ --section-bg:var(--cream); background:var(--section-bg); color:var(--ink); }
 /* แถบมืดมี 2 เฉด สลับกันไปตลอดหน้า — เขียวมอสเข้ม ↔ แดงเบอร์กันดี */
 .section--dark{
   background:var(--section-bg); color:var(--cream-2);
@@ -246,57 +245,54 @@ img{ max-width:100%; display:block; }
 }
 .count__note{ font-size:.92rem; letter-spacing:.04em; }
 
-/* ── การ์ดเชิญ — วางแบบ 2 คอลัมน์เหมือน ver.1 (โปร่ง ทันสมัย)
-   เลิกใช้แผ่นการ์ดทรงซุ้มวางกลางจอ เพราะอ่านเป็นทางการ/คลาสสิกเกินไป
-   ใช้รูปคู่กับข้อความเชิญเรียงข้างกัน จัดชิดซ้าย มีเส้นสีแดง–เขียวคั่น ── */
-.grid2{
-  display:grid; grid-template-columns:0.92fr 1.08fr;
-  gap:clamp(30px,5.5vw,72px); align-items:center;
-}
+/* ── การ์ดเชิญ (แผ่นครีมทรงโค้งบนพื้นน้ำตาล) ───────────── */
 .photo{ margin:0; position:relative; }
-/* กรอบเขียวมอสเยื้องออกไปด้านหลังรูป */
+.photo--sm{ width:min(100%,420px); margin:0 auto clamp(34px,6vh,64px); }
+/* กรอบทองเยื้องออกไปด้านหลังรูป */
 .photo::before{
-  content:""; position:absolute; inset:16px -16px -16px 16px;
-  border:1px solid var(--green); pointer-events:none;
+  content:""; position:absolute; inset:14px -14px -14px 14px;
+  border:1px solid var(--gold); pointer-events:none;
 }
 .photo img{
   position:relative; width:100%;
   border:1px solid var(--gold-line);
-  box-shadow:0 26px 70px -40px rgba(51,40,30,.75);
+  box-shadow:0 22px 60px -34px rgba(0,0,0,.75);
 }
 
-.invite{ position:relative; text-align:left; padding-left:clamp(18px,2.4vw,30px); }
-/* เส้นแนวตั้งไล่จากแดงไปเขียว — จุดที่สองสีหลักมาเจอกัน */
-.invite::before{
-  content:""; position:absolute; left:0; top:.4rem; bottom:.4rem; width:2px;
-  background:linear-gradient(180deg,var(--red),var(--green));
+.invite{
+  position:relative; margin-inline:auto; max-width:640px;
+  background:var(--cream-2); color:var(--ink); text-align:center;
+  padding:clamp(52px,8vw,86px) clamp(26px,6vw,60px) clamp(42px,6vw,68px);
+  /* ทรงโค้งด้านบนแบบซุ้มการ์ดเชิญ */
+  border-radius:50% 50% 4px 4px / 24% 24% 1% 1%;
+  box-shadow:0 40px 90px -55px #000;
 }
-.invite__parents{ margin:0; font-size:clamp(.92rem,2.2vw,1rem); line-height:2; }
+.invite::before{
+  content:""; position:absolute; inset:13px;
+  border:1px solid var(--gold); border-radius:inherit; pointer-events:none;
+}
+.invite__parents{ margin:0; font-size:clamp(.95rem,2.4vw,1.05rem); line-height:2.1; }
 .invite__and{
-  margin:.7rem 0; font-size:.86rem; letter-spacing:.16em; color:var(--green);
+  margin:1.1rem 0; font-size:.92rem; letter-spacing:.14em; color:var(--green);
 }
 .invite__lead{
-  margin:1.3rem 0 0; font-size:clamp(.95rem,2.3vw,1.02rem); line-height:1.95;
-  color:var(--ink-soft);
+  margin:1.5rem 0 0; font-size:clamp(.98rem,2.5vw,1.08rem); line-height:2;
 }
 .invite__names{
   font-family:var(--thai); font-weight:600;
-  font-size:clamp(1.08rem,2.6vw,1.4rem); line-height:1.95;
-  margin:.5rem 0 0; color:var(--ink);
+  font-size:clamp(1.05rem,3.2vw,1.45rem); line-height:2.1;
+  margin:.6rem 0 0; color:var(--ink);
 }
 .invite__names em{
   font-family:var(--serif); font-style:normal;
-  font-size:1.4em; color:var(--red); padding:0 .12em;
+  font-size:1.45em; color:var(--gold); padding:0 .15em;
 }
 .invite__date{
   font-family:var(--serif); color:var(--red);
-  font-size:clamp(2rem,4.6vw,2.9rem); letter-spacing:.06em;
-  margin:1.4rem 0 .3rem;
+  font-size:clamp(1.9rem,5.5vw,2.8rem); letter-spacing:.06em;
+  margin:1.5rem 0 .5rem;
 }
-.invite__venue{
-  margin:0; font-size:clamp(.92rem,2.2vw,1rem); letter-spacing:.04em;
-  color:var(--ink-soft);
-}
+.invite__venue{ margin:0; font-size:clamp(.95rem,2.4vw,1.05rem); letter-spacing:.04em; }
 
 /* ── กำหนดการ ─────────────────────────────────────────── */
 .section--valley{ overflow:hidden; padding-bottom:0; }
@@ -468,7 +464,6 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
   /* จอมือถือ: padding บน+ล่างของสองส่วนที่ติดกันจะบวกกันเป็นช่องว่างก้อนใหญ่
      (เดิม 97+97 = ~195px คั่นระหว่างข้อความสองบล็อก) จึงต้องบีบลง */
   .section{ padding:clamp(52px,7vh,88px) 0; }
-  .grid2{ grid-template-columns:1fr; gap:34px; }
   .script--lg{ margin-bottom:.45em; }
   .count{ margin:1.2rem 0 .9rem; }
   .count__cell{ padding:14px 6px; }
@@ -494,6 +489,7 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
   .agenda span{ text-align:left; }
   .photo::before{ inset:10px -10px -10px 10px; }
   .monogram{ width:66px; height:66px; }
+  .invite{ border-radius:50% 50% 4px 4px / 14% 14% 1% 1%; }
 }
 
 @media (prefers-reduced-motion:reduce){
