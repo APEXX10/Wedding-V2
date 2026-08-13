@@ -244,16 +244,15 @@ img{ max-width:100%; display:block; }
 /* ── การ์ดเชิญ (แผ่นครีมทรงโค้งบนพื้นน้ำตาล) ───────────── */
 .photo{ margin:0; position:relative; }
 .photo--sm{ width:min(100%,420px); margin:0 auto clamp(34px,6vh,64px); }
-.photo img{ position:relative; width:100%; }
-/* จางแบบเดียวกับแถบภาพวาด — เอาสีพื้นของส่วนนั้นมาไล่ทับ ไม่ได้ตัดขอบรูปทิ้ง
-   ต่างกันแค่ทิศทาง: ภาพวาดไล่จากด้านบน แต่รูปนี้หัวคู่บ่าวสาวอยู่ด้านบน
-   ถ้าไล่จากบนจะกลายเป็นย้อมสีแดงทับหน้า จึงไล่จากด้านล่างขึ้นเป็นหลัก
-   แล้วแตะด้านบนบาง ๆ พอให้ขอบไม่คมเป็นเส้นตรง */
-.photo::after{
-  content:""; position:absolute; inset:0; pointer-events:none;
-  background:
-    linear-gradient(0deg,var(--section-bg) 0%,transparent 45%),
-    linear-gradient(180deg,var(--section-bg) 0%,transparent 14%);
+/* กรอบทองเยื้องออกไปด้านหลังรูป */
+.photo::before{
+  content:""; position:absolute; inset:14px -14px -14px 14px;
+  border:1px solid var(--gold); pointer-events:none;
+}
+.photo img{
+  position:relative; width:100%;
+  border:1px solid var(--gold-line);
+  box-shadow:0 22px 60px -34px rgba(0,0,0,.75);
 }
 
 .invite{
@@ -483,6 +482,7 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
   .script--xl{ font-size:clamp(2.6rem,13vw,3.6rem); }
   .agenda li{ flex-direction:column; gap:.15rem; align-items:flex-start; }
   .agenda span{ text-align:left; }
+  .photo::before{ inset:10px -10px -10px 10px; }
   .invite{ border-radius:50% 50% 4px 4px / 14% 14% 1% 1%; }
 }
 
