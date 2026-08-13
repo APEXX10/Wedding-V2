@@ -289,19 +289,13 @@ img{ max-width:100%; height:auto; display:block; }
   background:var(--cream-2); color:var(--ink); text-align:center;
   padding:clamp(48px,7vw,76px) clamp(26px,6vw,60px) clamp(44px,6vw,66px);
   /* เส้นทอง 3 ชั้นซ้อนกัน = มิติ แต่ยังไม่กลับไปเป็นกรอบลายคลาสสิก
-     ① ขอบนอกทองเต็ม ② วงทองจาง ๆ นอกสุดจาก box-shadow ③ เส้นในจาก ::after */
+     ① ขอบนอกทองเต็ม ② วงทองจาง ๆ นอกสุดจาก box-shadow ③ เส้นในจาก ::after
+     (เดิมมีขีดแดง-เขียวคาดกลางขอบบนด้วย เอาออกแล้วเพราะดูเป็นติ่งโผล่กลางจอ) */
   border:1px solid var(--gold);
   border-radius:var(--invite-r);
   box-shadow:
     0 0 0 5px rgba(216,176,99,.13),
     0 34px 80px -50px rgba(0,0,0,.85);
-}
-/* ขีดสั้นไล่แดง→เขียวคาดกลางขอบบน */
-.invite::before{
-  content:""; position:absolute; left:50%; top:0; transform:translateX(-50%);
-  width:clamp(56px,18%,96px); height:3px; border-radius:0 0 3px 3px;
-  background:linear-gradient(90deg,var(--red),var(--green));
-  z-index:1;
 }
 /* เส้นทองด้านในเยื้องเข้ามา — ตัวที่ทำให้เกิดความลึก */
 .invite::after{

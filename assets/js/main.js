@@ -75,7 +75,12 @@ const music = (function(){
 
 /* ── เอฟเฟกต์ค่อย ๆ ปรากฏ ─────────────────────────────────
    ใช้การวัดตำแหน่งจริงแทน IntersectionObserver เพราะ IO จะไม่ยิง
-   เมื่อแท็บถูกซ่อน (document.hidden) แล้วเนื้อหาจะค้างที่ opacity:0 */
+   เมื่อแท็บถูกซ่อน (document.hidden) แล้วเนื้อหาจะค้างที่ opacity:0
+
+   ทำงาน "ทุกครั้งที่เลื่อน" ไม่ใช่ครั้งเดียวจบ:
+   เข้าเมื่อขอบบนของ element ขึ้นมาถึง 90% ของความสูงจอ
+   คืนค่าเมื่อเลื่อนจนหลุดออกนอกจอไปแล้วจริง ๆ (ล่างกว่าจอ หรือพ้นขอบบนไปหมด)
+   จึงเล่นซ้ำได้ทั้งเลื่อนลงและเลื่อนขึ้น โดยไม่วูบหายทั้งที่ยังอ่านอยู่ */
 (function reveal(){
   const items = [...document.querySelectorAll('.reveal')];
   items.forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 90}ms`; });
@@ -83,13 +88,10 @@ const music = (function(){
   let queued = false;
   const check = () => {
     queued = false;
-    for (let i = items.length - 1; i >= 0; i--) {
-      const el = items[i];
-      const top = el.getBoundingClientRect().top;
-      if (top < window.innerHeight * 0.9) {
-        el.classList.add('is-in');
-        items.splice(i, 1);
-      }
+    const h = window.innerHeight;
+    for (const el of items) {
+      const r = el.getBoundingClientRect();
+      el.classList.toggle('is-in', r.top < h * 0.9 && r.bottom > 0);
     }
   };
   // rAF ไม่ทำงานตอนแท็บถูกซ่อน จึงต้องมีทางลงให้ setTimeout ด้วย
