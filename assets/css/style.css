@@ -27,7 +27,6 @@
   --serif:"Cormorant Garamond", Georgia, serif;
   --thai:"Noto Serif Thai", "Cormorant Garamond", sans-serif;
   --script:"Pinyon Script", "Great Vibes", cursive;
-  --frame: 14px;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -45,12 +44,6 @@ body{
 }
 
 img{ max-width:100%; display:block; }
-
-/* ── กรอบขอบจอ (เดิมเป็นสีดำ ver.2 ใช้เขียวเข้ม) ────────── */
-.frame{
-  position:fixed; inset:0; z-index:60; pointer-events:none;
-  border:var(--frame) solid var(--olive-deep);
-}
 
 /* ── ตราอักษรย่อ ──────────────────────────────────────── */
 .monogram{
@@ -96,7 +89,7 @@ img{ max-width:100%; display:block; }
 
 /* ── จุดนำทางด้านข้าง ──────────────────────────────────── */
 .dots{
-  position:fixed; right:calc(var(--frame) + 14px); top:50%; transform:translateY(-50%);
+  position:fixed; right:18px; top:50%; transform:translateY(-50%);
   z-index:50; display:grid; gap:14px;
   opacity:0; transition:opacity .6s;
 }
@@ -354,7 +347,7 @@ img{ max-width:100%; display:block; }
 
 /* ── FOOTER ───────────────────────────────────────────── */
 .foot{
-  text-align:center; padding:70px 6vw calc(70px + var(--frame));
+  text-align:center; padding:70px 6vw 70px;
   background:var(--olive-deep); color:var(--cream-2);
   border-top:1px solid var(--gold-line);
 }
@@ -374,7 +367,7 @@ img{ max-width:100%; display:block; }
 .lb.is-on{ opacity:1; visibility:visible; }
 .lb img{ max-height:90vh; width:auto; box-shadow:0 30px 90px -40px #000; }
 .lb__close{
-  position:absolute; top:calc(var(--frame) + 10px); right:calc(var(--frame) + 16px);
+  position:absolute; top:16px; right:22px;
   background:none; border:0; color:var(--gold); font-size:2.4rem; line-height:1; cursor:pointer;
 }
 
@@ -403,8 +396,6 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
 }
 
 @media (max-width:820px){
-  :root{ --frame:9px; }
-
   /* จอมือถือ: padding บน+ล่างของสองส่วนที่ติดกันจะบวกกันเป็นช่องว่างก้อนใหญ่
      (เดิม 97+97 = ~195px คั่นระหว่างข้อความสองบล็อก) จึงต้องบีบลง */
   .section{ padding:clamp(52px,7vh,88px) 0; }
@@ -417,7 +408,7 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
   .btnrow{ margin-top:1.6rem; }
   .form{ margin-top:1.8rem; }
   .detail__art{ margin-top:clamp(30px,5vh,56px); }
-  .foot{ padding:46px 6vw calc(46px + var(--frame)); }
+  .foot{ padding:46px 6vw 46px; }
   .gal{ gap:18px; }
 
   .grid2{ grid-template-columns:1fr; }
