@@ -329,17 +329,16 @@ img{ max-width:100%; height:auto; display:block; }
 /* ── กำหนดการ ─────────────────────────────────────────── */
 .section--valley{ overflow:hidden; padding-bottom:0; }
 .detail__card{ position:relative; z-index:2; }
-/* แผ่นภาพขอบตรง + เส้นขอบทอง */
+/* แผ่นภาพขอบตรง ไม่มีเส้นขอบ — เส้นทองที่เคยตีไว้กลายเป็นเส้นเหลื่อมข้างภาพ */
 .detail__art{
   position:relative; margin:clamp(46px,8vh,90px) auto 0;
   width:min(100%, 996px);   /* 996px = ความกว้างจริงของ art-valley.jpg */
   height:clamp(230px,38vh,460px);
   background-size:cover; background-position:center 30%;
   background-image:url('../img/art-valley.jpg');
-  border:1px solid var(--gold); border-bottom:0;
 }
 .detail__art::before{
-  content:""; position:absolute; inset:-1px;
+  content:""; position:absolute; inset:0;
   background:linear-gradient(180deg,var(--section-bg) 0%,transparent 52%);
 }
 
