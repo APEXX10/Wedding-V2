@@ -40,14 +40,17 @@
 
 html{ scroll-behavior:smooth; }
 
+/* น้ำหนัก 400 ไม่ใช่ 300 — ฟอนต์เซริฟไทยที่ 300 มีเส้นบางกว่า 1 พิกเซลจริง
+   บนจอ scaling 125% เบราว์เซอร์ต้องเกลี่ยขอบเป็นสีเทา ตัวหนังสือเลยดูเบลอ/ซีด */
 body{
   margin:0;
   background:var(--cream);
   color:var(--ink);
   font-family:var(--thai);
-  font-weight:300;
+  font-weight:400;
   line-height:1.85;
   overflow-x:hidden;
+  text-rendering:optimizeLegibility;
 }
 
 img{ max-width:100%; display:block; }
@@ -132,12 +135,14 @@ img{ max-width:100%; display:block; }
 .section--green{ --section-bg:var(--green-deep); }
 .section--red{ --section-bg:var(--red-deep); }
 
+/* หัวข้อเล็กเป็นเซริฟตัวใหญ่ + ระยะห่างตัวอักษรกว้าง ถ้าน้ำหนักบางจะจางมาก
+   จึงขึ้นเป็น 500 และขยายขนาดอีกนิด */
 .eyebrow{
-  font-family:var(--serif); text-transform:uppercase;
-  letter-spacing:.42em; font-size:.72rem; color:var(--red);
+  font-family:var(--serif); font-weight:500; text-transform:uppercase;
+  letter-spacing:.38em; font-size:.78rem; color:var(--red);
   margin:0 0 .5rem;
 }
-.eyebrow--sub{ letter-spacing:.3em; font-size:.68rem; color:var(--green); }
+.eyebrow--sub{ letter-spacing:.28em; font-size:.74rem; color:var(--green); }
 .section--dark .eyebrow{ color:var(--gold-text); }
 
 .script{ font-family:var(--script); font-weight:400; margin:.1em 0; line-height:1.2; }
@@ -147,9 +152,9 @@ img{ max-width:100%; display:block; }
 .script em{ font-family:var(--serif); font-size:.42em; letter-spacing:.05em; color:var(--red); }
 .section--dark .script em{ color:var(--gold-text); }
 
-.lead{ font-size:1.02rem; margin:0 0 1rem; }
-.body{ font-size:.95rem; color:var(--ink-soft); margin:0 0 1.4rem; }
-.hint{ font-size:.8rem; color:var(--ink-soft); letter-spacing:.08em; margin-top:1.6rem; }
+.lead{ font-size:1.06rem; margin:0 0 1rem; }
+.body{ font-size:1rem; color:var(--ink-soft); margin:0 0 1.4rem; }
+.hint{ font-size:.86rem; color:var(--ink-soft); letter-spacing:.06em; margin-top:1.6rem; }
 .section--dark .body,
 .section--dark .hint,
 .section--dark .count__note{ color:var(--cream-soft); }
@@ -167,8 +172,8 @@ img{ max-width:100%; display:block; }
 
 .btn{
   display:inline-block; cursor:pointer;
-  font-family:var(--serif); font-size:.76rem;
-  letter-spacing:.22em; text-transform:uppercase; text-decoration:none;
+  font-family:var(--serif); font-size:.86rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; text-decoration:none;
   padding:.85rem 1.9rem; border-radius:999px;
   background:var(--red); color:var(--cream-2); border:1px solid var(--red);
   transition:.3s;
@@ -211,8 +216,9 @@ img{ max-width:100%; display:block; }
   margin:-.15em 0; color:var(--red);
 }
 .hero__meta{
-  font-family:var(--serif); letter-spacing:.24em; text-transform:uppercase;
-  font-size:clamp(.72rem,1.6vw,.95rem); margin:.45rem 0; color:var(--ink);
+  font-family:var(--serif); font-weight:500;
+  letter-spacing:.2em; text-transform:uppercase;
+  font-size:clamp(.82rem,1.8vw,1.02rem); margin:.5rem 0; color:var(--ink);
 }
 .hero__meta:first-of-type{ margin-top:1.6rem; }
 
@@ -240,10 +246,10 @@ img{ max-width:100%; display:block; }
   font-size:clamp(1.7rem,5.4vw,3rem); line-height:1; color:var(--cream-2);
 }
 .count__cell i{
-  display:block; font-style:normal; font-size:.72rem;
-  letter-spacing:.18em; color:var(--gold-text); margin-top:.5rem;
+  display:block; font-style:normal; font-size:.82rem; font-weight:400;
+  letter-spacing:.14em; color:var(--gold-text); margin-top:.5rem;
 }
-.count__note{ font-size:.92rem; letter-spacing:.04em; }
+.count__note{ font-size:.98rem; letter-spacing:.02em; }
 
 /* ── การ์ดเชิญ (แผ่นครีมทรงโค้งบนพื้นน้ำตาล) ───────────── */
 .photo{ margin:0; position:relative; }
@@ -271,12 +277,12 @@ img{ max-width:100%; display:block; }
   content:""; position:absolute; inset:13px;
   border:1px solid var(--gold); border-radius:inherit; pointer-events:none;
 }
-.invite__parents{ margin:0; font-size:clamp(.95rem,2.4vw,1.05rem); line-height:2.1; }
+.invite__parents{ margin:0; font-size:clamp(1rem,2.5vw,1.1rem); line-height:2.1; }
 .invite__and{
-  margin:1.1rem 0; font-size:.92rem; letter-spacing:.14em; color:var(--green);
+  margin:1.1rem 0; font-size:.98rem; letter-spacing:.1em; color:var(--green);
 }
 .invite__lead{
-  margin:1.5rem 0 0; font-size:clamp(.98rem,2.5vw,1.08rem); line-height:2;
+  margin:1.5rem 0 0; font-size:clamp(1.02rem,2.6vw,1.12rem); line-height:2;
 }
 .invite__names{
   font-family:var(--thai); font-weight:600;
@@ -292,7 +298,7 @@ img{ max-width:100%; display:block; }
   font-size:clamp(1.9rem,5.5vw,2.8rem); letter-spacing:.06em;
   margin:1.5rem 0 .5rem;
 }
-.invite__venue{ margin:0; font-size:clamp(.95rem,2.4vw,1.05rem); letter-spacing:.04em; }
+.invite__venue{ margin:0; font-size:clamp(1rem,2.5vw,1.1rem); letter-spacing:.02em; }
 
 /* ── กำหนดการ ─────────────────────────────────────────── */
 .section--valley{ overflow:hidden; padding-bottom:0; }
@@ -312,15 +318,15 @@ img{ max-width:100%; display:block; }
   background:linear-gradient(180deg,var(--section-bg) 0%,transparent 52%);
 }
 
-.dateblock{ margin:2.2rem 0 1rem; font-family:var(--serif); }
-.dateblock__day{ font-size:clamp(1.2rem,3vw,1.8rem); letter-spacing:.16em; margin:0; }
+.dateblock{ margin:2.2rem 0 1rem; font-family:var(--serif); font-weight:500; }
+.dateblock__day{ font-size:clamp(1.3rem,3.2vw,1.9rem); letter-spacing:.14em; margin:0; }
 .dateblock__row{
   display:flex; align-items:center; justify-content:center;
   gap:clamp(10px,3vw,28px); margin:.2rem 0;
 }
 .dateblock__num{ font-size:clamp(3rem,10vw,5.4rem); line-height:1; color:var(--red); }
 .dateblock__side{
-  font-size:clamp(.7rem,1.7vw,1rem); letter-spacing:.2em;
+  font-size:clamp(.8rem,1.9vw,1.05rem); letter-spacing:.16em;
   padding:.5rem 0; border-top:1px solid var(--gold); border-bottom:1px solid var(--gold);
   min-width:clamp(78px,18vw,150px);
 }
@@ -338,13 +344,13 @@ img{ max-width:100%; display:block; }
   width:1px; background:var(--gold-line);
 }
 .times b{
-  display:block; font-family:var(--serif); font-weight:400;
-  font-size:clamp(1.25rem,3.6vw,1.9rem); letter-spacing:.04em; color:var(--red);
+  display:block; font-family:var(--serif); font-weight:600;
+  font-size:clamp(1.45rem,4vw,2.05rem); letter-spacing:.02em; color:var(--red);
 }
 /* เวลา = แดง · ชื่อพิธี = เขียว ให้สองสีหลักอยู่คู่กันในบล็อกเดียว */
 .times span{
-  display:block; margin-top:.35rem;
-  font-size:clamp(.76rem,1.9vw,.88rem); line-height:1.7; color:var(--green);
+  display:block; margin-top:.4rem;
+  font-size:clamp(.86rem,2.1vw,.96rem); line-height:1.75; color:var(--green);
 }
 .section--dark .times b{ color:var(--gold-text); }
 .section--dark .times span{ color:var(--cream-soft); }
@@ -353,9 +359,9 @@ img{ max-width:100%; display:block; }
 .agenda li{
   display:flex; gap:1rem; align-items:baseline; justify-content:space-between;
   padding:.75rem 0; border-bottom:1px dashed var(--gold-line);
-  font-size:.94rem;
+  font-size:1rem;
 }
-.agenda b{ font-weight:500; letter-spacing:.04em; white-space:nowrap; color:var(--red); }
+.agenda b{ font-weight:600; letter-spacing:.02em; white-space:nowrap; color:var(--red); }
 .agenda span{ color:var(--ink-soft); text-align:right; }
 .section--dark .agenda b{ color:var(--gold-text); }
 .section--dark .agenda span{ color:var(--cream-soft); }
@@ -386,8 +392,8 @@ img{ max-width:100%; display:block; }
 .form .full{ grid-column:1/-1; }
 .form label{
   display:grid; gap:.4rem;
-  font-size:.76rem; letter-spacing:.14em; text-transform:uppercase;
-  font-family:var(--serif); color:var(--red);
+  font-size:.86rem; letter-spacing:.1em; text-transform:uppercase;
+  font-family:var(--serif); font-weight:500; color:var(--red);
 }
 .section--dark .form label{ color:var(--gold-text); }
 .form input,.form select,.form textarea{
@@ -418,7 +424,7 @@ img{ max-width:100%; display:block; }
 }
 .foot .script{ color:var(--cream-2); }
 .foot__date{
-  font-family:var(--thai); letter-spacing:.14em; font-size:.78rem;
+  font-family:var(--thai); letter-spacing:.08em; font-size:.9rem;
   color:var(--gold-text); margin:.6rem 0 0;
 }
 
