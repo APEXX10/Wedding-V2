@@ -55,16 +55,6 @@ body{
 
 img{ max-width:100%; display:block; }
 
-/* ── ตราอักษรย่อ ──────────────────────────────────────── */
-.monogram{
-  display:inline-grid; place-items:center;
-  width:78px; height:78px; margin:0 auto 1.5rem;
-  border:1px solid var(--gold); border-radius:50%;
-  font-family:var(--thai); font-size:1rem; letter-spacing:.1em;
-  color:var(--gold-text); line-height:1;
-}
-.monogram em{ font-family:var(--serif); font-style:normal; font-size:1.3em; }
-
 /* ── ม่านเปิดการ์ด ─────────────────────────────────────── */
 .curtain{
   position:fixed; inset:0; z-index:70;
@@ -303,7 +293,7 @@ img{ max-width:100%; display:block; }
 /* ── กำหนดการ ─────────────────────────────────────────── */
 .section--valley{ overflow:hidden; padding-bottom:0; }
 .detail__card{ position:relative; z-index:2; }
-/* แผ่นภาพทรงโค้ง + เส้นขอบทอง */
+/* แผ่นภาพขอบตรง + เส้นขอบทอง */
 .detail__art{
   position:relative; margin:clamp(46px,8vh,90px) auto 0;
   width:min(100%, 996px);   /* 996px = ความกว้างจริงของ art-valley.jpg */
@@ -311,10 +301,9 @@ img{ max-width:100%; display:block; }
   background-size:cover; background-position:center 30%;
   background-image:url('../img/art-valley.jpg');
   border:1px solid var(--gold); border-bottom:0;
-  border-radius:50% 50% 0 0 / 22% 22% 0 0;
 }
 .detail__art::before{
-  content:""; position:absolute; inset:-1px; border-radius:inherit;
+  content:""; position:absolute; inset:-1px;
   background:linear-gradient(180deg,var(--section-bg) 0%,transparent 52%);
 }
 
@@ -494,7 +483,6 @@ html.js .reveal.is-in{ opacity:1; transform:none; }
   .agenda li{ flex-direction:column; gap:.15rem; align-items:flex-start; }
   .agenda span{ text-align:left; }
   .photo::before{ inset:10px -10px -10px 10px; }
-  .monogram{ width:66px; height:66px; }
   .invite{ border-radius:50% 50% 4px 4px / 14% 14% 1% 1%; }
 }
 
