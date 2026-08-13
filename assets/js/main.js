@@ -237,6 +237,9 @@ const music = (function(){
       form.hidden = true;
       thanks.hidden = false;
       thanks.classList.add('is-in');
+      // คืนสภาพปุ่มไว้ด้วย เผื่อฟอร์มถูกดึงกลับมาแสดงภายหลัง จะได้ไม่ค้างคำว่า "กำลังส่ง…"
+      btn.disabled = false;
+      btn.textContent = 'ส่งคำตอบรับ';
     };
     const showForm = (msg) => {
       form.hidden = false;
