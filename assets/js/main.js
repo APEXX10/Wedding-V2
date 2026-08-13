@@ -28,6 +28,35 @@ const WEDDING = {
 
 document.documentElement.classList.add('js');
 
+/* ── เพลงประกอบ ───────────────────────────────────────────
+   เบราว์เซอร์ทุกตัวบล็อกการเล่นเสียงอัตโนมัติที่ผู้ใช้ไม่ได้สั่ง
+   จึงเริ่มเล่นตอนกด "เปิดการ์ด" ซึ่งนับเป็นการกดของผู้ใช้ และมีปุ่มปิดให้เสมอ */
+const music = (function(){
+  const audio = document.getElementById('bgm');
+  const btn = document.getElementById('musicBtn');
+
+  const sync = () => {
+    const playing = !audio.paused;
+    btn.classList.toggle('is-playing', playing);
+    btn.setAttribute('aria-pressed', String(playing));
+    btn.setAttribute('aria-label', playing ? 'ปิดเพลง' : 'เปิดเพลง');
+  };
+
+  const start = () => {
+    audio.volume = 0.45;
+    // ถ้าเบราว์เซอร์ยังปฏิเสธ ก็แค่ไม่เล่น ปุ่มยังกดเองได้ ไม่ต้องมี error
+    audio.play().then(sync).catch(sync);
+  };
+
+  btn.addEventListener('click', () => {
+    if (audio.paused) start(); else { audio.pause(); sync(); }
+  });
+  audio.addEventListener('play', sync);
+  audio.addEventListener('pause', sync);
+
+  return { start, show: () => btn.classList.add('is-on') };
+})();
+
 /* ── ม่านเปิดการ์ด ─────────────────────────────────────── */
 (function curtain(){
   const el = document.getElementById('curtain');
@@ -36,6 +65,8 @@ document.documentElement.classList.add('js');
   const open = () => {
     el.classList.add('is-open');
     document.body.style.overflow = '';
+    music.start();
+    music.show();
     setTimeout(() => dots.classList.add('is-on'), 700);
   };
   document.body.style.overflow = 'hidden';
