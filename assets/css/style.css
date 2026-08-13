@@ -244,19 +244,16 @@ img{ max-width:100%; display:block; }
 /* ── การ์ดเชิญ (แผ่นครีมทรงโค้งบนพื้นน้ำตาล) ───────────── */
 .photo{ margin:0; position:relative; }
 .photo--sm{ width:min(100%,420px); margin:0 auto clamp(34px,6vh,64px); }
-/* ไล่ระดับให้ขอบรูปจางหายไปกับพื้นหลัง แบบเดียวกับแถบภาพส่วนอื่น
-   ใช้ mask 2 ชั้น (แนวตั้ง + แนวนอน) แล้วซ้อนกันแบบ intersect ให้จางครบทั้ง 4 ด้าน
-   ไม่ใส่กรอบ/เงา เพราะเส้นขอบคม ๆ จะขัดกับขอบที่ตั้งใจให้ละลายหายไป */
-.photo img{
-  position:relative; width:100%;
-  -webkit-mask-image:
-    linear-gradient(180deg,transparent 0%,#000 15%,#000 80%,transparent 100%),
-    linear-gradient(90deg,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  mask-image:
-    linear-gradient(180deg,transparent 0%,#000 15%,#000 80%,transparent 100%),
-    linear-gradient(90deg,transparent 0%,#000 12%,#000 88%,transparent 100%);
-  -webkit-mask-composite:source-in;   /* ไวยากรณ์เก่าของ Safari */
-  mask-composite:intersect;
+.photo img{ position:relative; width:100%; }
+/* จางแบบเดียวกับแถบภาพวาด — เอาสีพื้นของส่วนนั้นมาไล่ทับ ไม่ได้ตัดขอบรูปทิ้ง
+   ต่างกันแค่ทิศทาง: ภาพวาดไล่จากด้านบน แต่รูปนี้หัวคู่บ่าวสาวอยู่ด้านบน
+   ถ้าไล่จากบนจะกลายเป็นย้อมสีแดงทับหน้า จึงไล่จากด้านล่างขึ้นเป็นหลัก
+   แล้วแตะด้านบนบาง ๆ พอให้ขอบไม่คมเป็นเส้นตรง */
+.photo::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    linear-gradient(0deg,var(--section-bg) 0%,transparent 45%),
+    linear-gradient(180deg,var(--section-bg) 0%,transparent 14%);
 }
 
 .invite{
