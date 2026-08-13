@@ -171,6 +171,14 @@ img{ max-width:100%; height:auto; display:block; }
 .script em{ font-family:var(--serif); font-size:.42em; letter-spacing:.05em; color:var(--red); }
 .section--dark .script em{ color:var(--gold-text); }
 
+/* บล็อกเรื่องราวแบบ ver.1 — จัดชิดซ้าย ตัวชื่อเป็นเซริฟตัวใหญ่เว้นระยะกว้าง */
+.serif-title{
+  font-family:var(--serif); font-weight:500;
+  font-size:clamp(1.9rem,5vw,3.1rem); letter-spacing:.06em;
+  line-height:1.15; margin:.3em 0 .8em; color:var(--ink);
+}
+.sign{ color:var(--red); margin-top:1.6rem; }
+
 .lead{ font-size:1.06rem; margin:0 0 1rem; }
 .body{ font-size:1rem; color:var(--ink-soft); margin:0 0 1.4rem; }
 .hint{ font-size:.86rem; color:var(--ink-soft); letter-spacing:.06em; margin-top:1.6rem; }
